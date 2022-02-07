@@ -10,6 +10,15 @@ pong.up()
 pong.shape('circle')
 pong.color('white')
 pong.shapesize(float(.5))
+wall2 = trtl.Turtle()
+
+wall2.up()
+wall2.shape('square')
+wall2.color('white')
+wall2.shapesize(.5, 5, .5)
+wall2.goto(-350, 0)
+wall2.seth(90)
+wall2.hideturtle()
 
 wall1 = trtl.Turtle()
 wall1.up()
@@ -27,7 +36,10 @@ angle = 0
 # move buttons
 def up():
     wall1.fd(10)
-
+def LL():
+    wall2.fd(10)
+def Ln():
+    wall2.bk(10)
 def dn():
     wall1.bk(10)
 
@@ -53,6 +65,8 @@ def startscreen():
         pong.showturtle()
         wn.onkeypress(up,"Up")
         wn.onkeypress(dn, "Down")
+        wn.onkey(LL,"w")
+        wn.onkey(Ln,"s") 
         wn.listen()
         wn.mainloop()
         
@@ -74,5 +88,7 @@ else:
     pong.showturtle()
     wn.onkeypress(up,"Up")
     wn.onkeypress(dn, "Down")
+    wn.onkey(LL,"w")
+    wn.onkey(Ln,"s") 
     wn.listen()
     wn.mainloop()
