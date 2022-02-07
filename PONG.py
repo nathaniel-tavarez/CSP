@@ -1,5 +1,6 @@
 import turtle as trtl
 
+# pong ball and walls
 pong = trtl.Turtle()
 pong.up()
 pong.shape('circle')
@@ -14,6 +15,7 @@ wall1.goto(350, 0)
 wall1.seth(90)
 angle = 0
 
+# move buttons
 def up():
     wall1.fd(10)
 
