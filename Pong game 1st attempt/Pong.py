@@ -1,3 +1,4 @@
+from tkinter import Image
 import turtle as trtl
 wn = trtl.Screen()
 
@@ -5,10 +6,9 @@ wn = trtl.Screen()
 pong = trtl.Turtle()
 pong.up()
 pong.shape('circle')
-pong.color('white')
-pong.shapesize(float(.5))
+pong.color('green')
+pong.shapesize(float(.8))
 wall2 = trtl.Turtle()
-
 wall2.up()
 wall2.shape('square')
 wall2.color('white')
@@ -52,13 +52,14 @@ def stort():
     wall2.st()
     pong.st()
 
+
 #while (True):
 #    if (abs(pong.xcor() - wall1.xcor()) < 20):
 #        if (abs(pong.ycor() - wall1.ycor()) < 20):
 #            pong.seth(angle + 180)
 
+wn.bgpic("maze3.png")
 wn.listen()
-wn.bgcolor('black')
 wn.onkeypress(up,"Up")
 wn.onkeypress(dn, "Down")
 wn.onkey(LL,"w")
