@@ -51,6 +51,20 @@ def stort():
     wall1.st()
     wall2.st()
     pong.st()
+    while (True):
+        pong.fd(2)
+        # detect collisions between pong ball and the walls
+        wn_canvas = wn.getcanvas()
+        x,y = pong.position()
+        margin = 5
+        items = wn_canvas.find_overlapping(x+margin, -y+margin, x-margin, -y-margin)
+        # check if canvas is not empty
+        if (len(items) > 0):
+            print(items[0])
+            # get property of lowest object (canvas)
+            canvas_color = wn_canvas.itemcget(items[0], 'fill')
+            if canvas_color == wall1.color():
+                pong.seth(angle + 45)
 
 
 #while (True):
