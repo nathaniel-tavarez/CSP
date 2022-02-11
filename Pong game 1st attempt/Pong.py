@@ -32,7 +32,6 @@ wall1.hideturtle()
 pong.hideturtle()
 wall2.hideturtle()
 
-angle = -180
 curser_size = 20
 
 # move buttons
@@ -49,7 +48,6 @@ def dn():
 strtbttn = "StartButton.gif"
 wn.addshape(strtbttn)
 startbutton = trtl.Turtle(shape=strtbttn)
-startbutton.shapesize(1)
 def stort():
     startbutton.ht()
     wall1.st()
@@ -63,10 +61,10 @@ def run_pong():
         # detect collisions between pong ball and the walls
         if collision(pong, wall1):
             pong.bk(3)
-            pong.seth(abs(pong.ycor() - wall1.ycor()) * -20)
+            pong.seth(abs(pong.ycor() - wall1.ycor()) + 180)
         if collision(pong, wall2):
             pong.bk(3)
-            pong.seth(abs(pong.ycor() - wall2.ycor()) * -20)
+            pong.seth(abs(pong.ycor() - wall2.ycor()))
 
 def collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
