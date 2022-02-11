@@ -1,18 +1,22 @@
-from tkinter import Image
 import turtle as trtl
+
 wn = trtl.Screen()
+wn.bgcolor('black')
 
 # pong ball and walls
+wall_width, wall_height = .5, 10
+
 pong = trtl.Turtle()
 pong.up()
 pong.shape('circle')
-pong.color('green')
-pong.shapesize(float(.8))
+pong.color('white')
+pong.shapesize(float(.5))
+
 wall2 = trtl.Turtle()
 wall2.up()
 wall2.shape('square')
 wall2.color('blue')
-wall2.shapesize(.5, 10, .5)
+wall2.shapesize(wall_width, wall_height)
 wall2.goto(-350, 0)
 wall2.seth(90)
 
@@ -20,7 +24,7 @@ wall1 = trtl.Turtle()
 wall1.up()
 wall1.shape('square')
 wall1.color('red')
-wall1.shapesize(.5, 10, .5)
+wall1.shapesize(wall_width, wall_height)
 wall1.goto(350, 0)
 wall1.seth(90)
 
@@ -28,7 +32,8 @@ wall1.hideturtle()
 pong.hideturtle()
 wall2.hideturtle()
 
-angle = 0
+angle = -180
+curser_size = 20
 
 # move buttons
 def up():
@@ -50,33 +55,27 @@ def stort():
     wall1.st()
     wall2.st()
     pong.st()
-    while (True):
-        pong.fd(2)
+    run_pong()
+
+def run_pong():
+    while True:
+        pong.fd(3)
         # detect collisions between pong ball and the walls
-        wn_canvas = wn.getcanvas()
-        x,y = pong.position()
-        margin = 5
-        items = wn_canvas.find_overlapping(x+margin, -y+margin, x-margin, -y-margin)
-        # check if canvas is not empty
-        if (len(items) > 0):
-            print(items[0])
-            # get property of lowest object (canvas)
-            canvas_color = wn_canvas.itemcget(items[0], 'fill')
-            if canvas_color == wall1.color():
-                pong.seth(angle + 45)
+        if collision(pong, wall1):
+            pong.bk(3)
+            pong.seth(abs(pong.ycor() - wall1.ycor()) * -20)
+        if collision(pong, wall2):
+            pong.bk(3)
+            pong.seth(abs(pong.ycor() - wall2.ycor()) * -20)
+
+def collision(a, b):
+    return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
 
 
-#while (True):
-#    if (abs(pong.xcor() - wall1.xcor()) < 20):
-#        if (abs(pong.ycor() - wall1.ycor()) < 20):
-#            pong.seth(angle + 180)
-
-wn.bgpic("maze3.png")
-wn.listen()
 wn.onkeypress(up,"Up")
 wn.onkeypress(dn, "Down")
-wn.onkey(LL,"w")
-wn.onkey(Ln,"s") 
+wn.onkeypress(LL,"w")
+wn.onkeypress(Ln,"s") 
 wn.onkeypress(stort, "space")
 wn.listen()
 wn.mainloop()
