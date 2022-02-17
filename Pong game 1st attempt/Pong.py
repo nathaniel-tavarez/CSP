@@ -42,14 +42,14 @@ bttm_border.up()
 bttm_border.shape('square')
 bttm_border.color('white')
 bttm_border.shapesize(border_width, border_height)
-bttm_border.goto(0, -300)
+bttm_border.goto(0, 300)
 bttm_border.seth(90)
 
 # hide all turtles before game starts
 wall1.ht()
 pong.ht()
 wall2.ht()
-top_border.ht()
+#top_border.ht()
 
 curser_size = 20
 angle = 0
@@ -92,6 +92,9 @@ def run_pong():
         if hrzntl_brdr_colide(pong, top_border):
             pong.bk(3)
             pong.seth(angle * -1)
+        if hrzntl_brdr_colide(pong, bttm_border):
+            pong.bk(3)
+            pong.seth(angle)
 
 def paddle_collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
