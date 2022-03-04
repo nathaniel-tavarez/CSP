@@ -2,15 +2,18 @@ import turtle as trtl
 
 wn = trtl.Screen()
 wn.bgcolor('black')
+background = "maze3.gif"
+wn.addshape(background)
+wn.bgpic(background)
 
 # pong ball and walls
-wall_width, wall_height = .5, 10
+wall_width, wall_height = .5, 5
 border_width, border_height = 40, .5
 
 pong = trtl.Turtle()
 pong.up()
 pong.shape('circle')
-pong.color('white')
+pong.color('black')
 pong.shapesize(float(.5))
 
 wall2 = trtl.Turtle()
@@ -49,7 +52,6 @@ bttm_border.seth(90)
 wall1.ht()
 pong.ht()
 wall2.ht()
-#top_border.ht()
 
 curser_size = 20
 angle = 0
@@ -79,22 +81,28 @@ def stort():
 def run_pong():
     global angle
     while True:
-        pong.fd(3)
+        pong.fd(5)
         # detect collisions between pong ball and the walls
         if paddle_collision(pong, wall1):
-            pong.bk(3)
-            angle = abs(pong.ycor() - wall1.ycor()) + 180
-            pong.seth(abs(pong.ycor() - wall1.ycor()) + 180)
-        if paddle_collision(pong, wall2):
-            pong.bk(3)
-            angle = abs(pong.ycor() - wall2.ycor()) * -1
-            pong.seth(abs(pong.ycor() - wall2.ycor()) * -1)
-        if hrzntl_brdr_colide(pong, top_border):
-            pong.bk(3)
-            pong.seth(angle * -1)
-        if hrzntl_brdr_colide(pong, bttm_border):
-            pong.bk(3)
+            pong.bk(5)
+            angle = (pong.heading() + wall1.ycor() * -1)
+            # abs(pong.ycor() - wall1.ycor())
+            if angle == 0.0:
+                angle = 180
             pong.seth(angle)
+            print(angle)
+        if paddle_collision(pong, wall2):
+            pong.bk(5)
+            angle = (pong.heading() + wall2.ycor() * -1)
+            pong.seth(angle)
+        if hrzntl_brdr_colide(pong, top_border):
+            pong.bk(5)
+            pong.seth(angle - angle/2)
+            print(angle - angle/2)
+        if hrzntl_brdr_colide(pong, bttm_border):
+            pong.bk(5)
+            pong.seth(angle - angle/2)
+            print(angle - angle/2)
 
 def paddle_collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
