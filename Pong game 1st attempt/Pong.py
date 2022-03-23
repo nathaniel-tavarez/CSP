@@ -98,12 +98,12 @@ def run_pong():
             pong.seth(angle)
         if hrzntl_brdr_colide(pong, top_border):
             pong.bk(5)
-            pong.seth(angle * -1)
-            print(angle * -1)
+            pong.seth(angle - 90)
+            print(angle - 90)
         if hrzntl_brdr_colide(pong, bttm_border):
             pong.bk(5)
-            pong.seth(angle * 2)
-            print(angle * 2)
+            pong.seth(angle + 90)
+            print(angle + 90)
 
 def paddle_collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
