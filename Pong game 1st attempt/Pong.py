@@ -16,22 +16,20 @@ pong.shape('circle')
 pong.color('black')
 pong.shapesize(float(.5))
 
-wall4= trtl.Turtle
+wall4 = trtl.Turtle()
 wall4.up()
 wall4.shape('square')
-wall4.color('blue')
+wall4.color('white')
 wall4.shapesize(wall_width, wall_height)
-wall4.goto(-350, 0)
+wall4.goto(999, 0)
 wall4.seth(90)
 
-
-
-wall3= trtl.Turtle
+wall3 = trtl.Turtle()
 wall3.up()
 wall3.shape('square')
-wall3.color('blue')
+wall3.color('white')
 wall3.shapesize(wall_width, wall_height)
-wall3.goto(-350, 0)
+wall3.goto(999, 0)
 wall3.seth(90)
 
 
@@ -105,7 +103,6 @@ def run_pong():
         if paddle_collision(pong, wall1):
             pong.bk(5)
             angle = (pong.heading() + wall1.ycor() * -1)
-            # abs(pong.ycor() - wall1.ycor())
             if angle == 0.0:
                 angle = 180
             pong.seth(angle)
@@ -113,15 +110,17 @@ def run_pong():
         if paddle_collision(pong, wall2):
             pong.bk(5)
             angle = (pong.heading() + wall2.ycor() * -1)
+            if angle == 180:
+                angle = 0
             pong.seth(angle)
         if hrzntl_brdr_colide(pong, top_border):
             pong.bk(5)
-            pong.seth(angle - angle/2)
-            print(angle - angle/2)
+            pong.seth(angle + 180)
+            print(angle + 180)
         if hrzntl_brdr_colide(pong, bttm_border):
             pong.bk(5)
-            pong.seth(angle - angle/2)
-            print(angle - angle/2)
+            pong.seth(angle - 180)
+            print(angle - 180)
         if paddle_collision(pong, wall3):
             print("point")
         if paddle_collision(pong, wall4):
