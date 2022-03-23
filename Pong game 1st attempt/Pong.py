@@ -1,3 +1,4 @@
+from multiprocessing import pool
 import turtle as trtl
 import random as Rand
 
@@ -17,22 +18,21 @@ pong.shape('circle')
 pong.color('black')
 pong.shapesize(float(.5))
 
-wall4 = trtl.Turtle()
+wall4= trtl.Turtle ()
 wall4.up()
 wall4.shape('square')
 wall4.color('white')
-wall4.shapesize(wall_width, wall_height)
-wall4.goto(999, 0)
+wall4.shapesize(border_height, border_width)
+wall4.goto(525, 0)
 wall4.seth(90)
 
-wall3 = trtl.Turtle()
+wall3= trtl.Turtle ()
 wall3.up()
 wall3.shape('square')
 wall3.color('white')
-wall3.shapesize(wall_width, wall_height)
-wall3.goto(999, 0)
+wall3.shapesize(border_height, border_width)
+wall3.goto(-525, 0)
 wall3.seth(90)
-
 
 wall2 = trtl.Turtle()
 wall2.up()
@@ -73,6 +73,7 @@ wall2.ht()
 
 curser_size = 20
 angle = 0
+poolean = True
 
 # move buttons
 def up():
@@ -83,8 +84,25 @@ def Ln():
     wall2.bk(10)
 def dn():
     wall1.bk(10)
+
+# fun buttons
 def bugfix():
     pong.seth(Rand.randint(0, 360))
+def funbutton():
+    global angle
+    global poolean
+    poolean = False
+    while poolean == False:
+        pong.fd(5)
+        if paddle_collision(pong, wall1):
+            bugfix()
+        if paddle_collision(pong, wall2):
+            bugfix()
+        if hrzntl_brdr_colide(pong, top_border):
+            pong.seth(Rand.randint(0, -180))
+        if hrzntl_brdr_colide(pong, bttm_border):
+            pong.seth(Rand.randint(0, -180))
+
 
 # start button
 strtbttn = "StartButton.gif"
@@ -100,7 +118,7 @@ def stort():
 
 def run_pong():
     global angle
-    while True:
+    while poolean == True:
         pong.fd(5)
         # detect collisions between pong ball and the walls
         if paddle_collision(pong, wall1):
@@ -126,8 +144,9 @@ def run_pong():
             print(angle - 180)
         if paddle_collision(pong, wall3):
             print("point")
+            pong.goto(0,0)  
         if paddle_collision(pong, wall4):
-            print("point")   
+            print("point") 
 
 
 def paddle_collision(a, b):
@@ -141,6 +160,7 @@ wn.onkeypress(dn,"Down")
 wn.onkeypress(LL,"w")
 wn.onkeypress(Ln,"s") 
 wn.onkeypress(bugfix,"slash")
+wn.onkeypress(funbutton,"f")
 wn.onkeypress(stort, "space")
 wn.listen()
 wn.mainloop()
