@@ -84,7 +84,7 @@ def Ln():
 def dn():
     wall1.bk(10)
 def bugfix():
-    pong.seth(Rand.randint(0, 180))
+    pong.seth(Rand.randint(0, 360))
 
 # start button
 strtbttn = "StartButton.gif"
@@ -140,7 +140,7 @@ wn.onkeypress(up,"Up")
 wn.onkeypress(dn,"Down")
 wn.onkeypress(LL,"w")
 wn.onkeypress(Ln,"s") 
-wn.onkeypress(bugfix,"g")
+wn.onkeypress(bugfix,"slash")
 wn.onkeypress(stort, "space")
 wn.listen()
 wn.mainloop()
