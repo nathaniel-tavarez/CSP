@@ -1,4 +1,5 @@
 import turtle as trtl
+import random as Rand
 
 wn = trtl.Screen()
 wn.bgcolor('black')
@@ -82,6 +83,8 @@ def Ln():
     wall2.bk(10)
 def dn():
     wall1.bk(10)
+def bugfix():
+    pong.seth(Rand.randint(0, 180))
 
 # start button
 strtbttn = "StartButton.gif"
@@ -125,8 +128,7 @@ def run_pong():
             print("point")
         if paddle_collision(pong, wall4):
             print("point")   
-           
-           
+
 
 def paddle_collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
@@ -135,9 +137,10 @@ def hrzntl_brdr_colide(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + border_width * curser_size and abs(a.ycor() - b.ycor()) < curser_size/2 + border_height/2
 
 wn.onkeypress(up,"Up")
-wn.onkeypress(dn, "Down")
+wn.onkeypress(dn,"Down")
 wn.onkeypress(LL,"w")
 wn.onkeypress(Ln,"s") 
+wn.onkeypress(bugfix,"g")
 wn.onkeypress(stort, "space")
 wn.listen()
 wn.mainloop()
