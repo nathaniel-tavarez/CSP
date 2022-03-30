@@ -93,10 +93,10 @@ def funbutton():
         if paddle_collision(pong, wall2):
             bugfix()
         if hrzntl_brdr_colide(pong, top_border):
-            pong.seth(Rand.randint(0, -180))
+            pong.seth(Rand.randint(-180, 0))
         if hrzntl_brdr_colide(pong, bttm_border):
-            pong.seth(Rand.randint(0, -180))
-
+            pong.seth(Rand.randint(0, 180))
+            #bugfix()
 
 # start button
 strtbttn = "StartButton.gif"
