@@ -10,7 +10,7 @@ wn.bgpic(background)
 
 # pong ball and walls
 wall_width, wall_height = .5, 5
-border_width, border_height = 45, .5
+border_width, border_height = 80, .5
 
 pong = trtl.Turtle()
 pong.up()
@@ -125,7 +125,7 @@ def funbutton():
         if scorebordercoll(pong, wall4):
             bluescore += 1
             scorecount2.clear()
-            scorecount2.write(redscore, font=font_setup)
+            scorecount2.write(bluescore, font=font_setup)
             reset()
 
 # start button
@@ -161,13 +161,9 @@ def run_pong():
                 angle = 0
             pong.seth(angle)
         if hrzntl_brdr_colide(pong, top_border):
-            pong.bk(5)
-            pong.seth(angle + 180)
-            print(angle + 180)
+            pong.seth(Rand.randint(0, 180))
         if hrzntl_brdr_colide(pong, bttm_border):
-            pong.bk(5)
-            pong.seth(angle - 180)
-            print(angle - 180)
+            pong.seth(Rand.randint(-180, 0))
         if scorebordercoll(pong, wall3):
             redscore += 1
             scorecount1.clear()
@@ -176,7 +172,7 @@ def run_pong():
         if scorebordercoll(pong, wall4):
             bluescore += 1
             scorecount2.clear()
-            scorecount2.write(redscore, font=font_setup)
+            scorecount2.write(bluescore, font=font_setup)
             reset()
 
 
