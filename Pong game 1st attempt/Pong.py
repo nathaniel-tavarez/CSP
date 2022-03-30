@@ -1,4 +1,3 @@
-from ossaudiodev import SNDCTL_COPR_WCODE
 import turtle as trtl
 import random as Rand
 
