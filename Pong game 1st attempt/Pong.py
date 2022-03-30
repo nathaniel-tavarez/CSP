@@ -1,4 +1,3 @@
-from multiprocessing import pool
 import turtle as trtl
 import random as Rand
 
@@ -65,11 +64,6 @@ bttm_border.color('white')
 bttm_border.shapesize(border_width, border_height)
 bttm_border.goto(0, 300)
 bttm_border.seth(90)
-
-# hide all turtles before game starts
-wall1.ht()
-pong.ht()
-wall2.ht()
 
 curser_size = 20
 angle = 0
