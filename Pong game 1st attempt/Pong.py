@@ -1,6 +1,7 @@
 import turtle as trtl
 import random as Rand
 
+# game screen setup
 wn = trtl.Screen()
 wn.bgcolor('black')
 background = "maze3.gif"
@@ -65,6 +66,7 @@ bttm_border.shapesize(border_width, border_height)
 bttm_border.goto(0, 300)
 bttm_border.seth(90)
 
+# score counters
 scorecount1 = trtl.Turtle()
 scorecount1.up()
 scorecount1.goto(50, 250)
@@ -77,6 +79,7 @@ scorecount2.goto(-150, 250)
 scorecount2.pd()
 scorecount2.ht()
 
+# variables for the game
 curser_size = 20
 angle = 0
 poolean = True
@@ -126,6 +129,8 @@ def funbutton():
             scorecount2.clear()
             scorecount2.write(bluescore, font=font_setup)
             reset()
+def stop():
+    wn.bye()
 
 # start button
 strtbttn = "StartButton.gif"
@@ -139,6 +144,7 @@ def stort():
     top_border.st()
     run_pong()
 
+# game runs
 def run_pong():
     global angle
     global bluescore
@@ -174,7 +180,7 @@ def run_pong():
             scorecount2.write(bluescore, font=font_setup)
             reset()
 
-
+# collision functions
 def paddle_collision(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width/2 and abs(a.ycor() - b.ycor()) < curser_size/2 + wall_height * curser_size
 
@@ -184,6 +190,7 @@ def hrzntl_brdr_colide(a, b):
 def scorebordercoll(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width * curser_size and abs(a.ycor() - b.ycor()) < curser_size/2 + 999/2
 
+# key press sensors
 wn.onkeypress(up,"Up")
 wn.onkeypress(dn,"Down")
 wn.onkeypress(LL,"w")
@@ -192,5 +199,6 @@ wn.onkeypress(bugfix,"slash")
 wn.onkeypress(funbutton,"f")
 wn.onkeypress(stort, "space")
 wn.onkeypress(reset, "r")
+wn.onkeypress(stop, "Escape")
 wn.listen()
 wn.mainloop()
