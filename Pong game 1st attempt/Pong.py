@@ -7,11 +7,14 @@ wn.bgcolor('black')
 background = "maze3.gif"
 wn.addshape(background)
 wn.bgpic(background)
+endscreen = 'end credits.gif'
+wn.addshape(endscreen)
 
 # pong ball and walls
 wall_width, wall_height = .5, 5
 border_width, border_height = 80, .5
 
+# pong ball
 pong = trtl.Turtle()
 pong.up()
 pong.shape('circle')
@@ -19,6 +22,7 @@ pong.color('black')
 pong.shapesize(float(.5))
 pong.speed("fastest")
 
+# paddles and walls
 wall4= trtl.Turtle ()
 wall4.up()
 wall4.shape('square')
@@ -74,19 +78,19 @@ bttm_border.seth(90)
 bttm_border.speed("fastest")
 
 # score counters
-scorecount1 = trtl.Turtle()
-scorecount1.up()
-scorecount1.goto(50, 250)
-scorecount1.pd()
-scorecount1.ht()
-scorecount1.speed("fastest")
+scorer1 = trtl.Turtle()
+scorer1.up()
+scorer1.goto(50, 250)
+scorer1.pd()
+scorer1.ht()
+scorer1.speed("fastest")
 
-scorecount2 = trtl.Turtle()
-scorecount2.up()
-scorecount2.goto(-150, 250)
-scorecount2.pd()
-scorecount2.ht()
-scorecount2.speed("fastest")
+scorer2 = trtl.Turtle()
+scorer2.up()
+scorer2.goto(-150, 250)
+scorer2.pd()
+scorer2.ht()
+scorer2.speed("fastest")
 
 # variables for the game
 curser_size = 20
@@ -121,25 +125,30 @@ def funbutton():
     while poolean == False:
         pong.fd(5)
         if paddle_collision(pong, wall1):
+            pong.bk(5)
             bugfix()
         if paddle_collision(pong, wall2):
+            pong.bk(5)
             bugfix()
         if hrzntl_brdr_colide(pong, top_border):
+            pong.bk(5)
             pong.seth(Rand.randint(0, 180))
         if hrzntl_brdr_colide(pong, bttm_border):
+            pong.bk(5)
             pong.seth(Rand.randint(-180, 0))
         if scorebordercoll(pong, wall3):
             redscore += 1
-            scorecount1.clear()
-            scorecount1.write(redscore, font=font_setup)
+            scorer1.clear()
+            scorer1.write(redscore, font=font_setup)
             reset()
         if scorebordercoll(pong, wall4):
             bluescore += 1
-            scorecount2.clear()
-            scorecount2.write(bluescore, font=font_setup)
+            scorer2.clear()
+            scorer2.write(bluescore, font=font_setup)
             reset()
 def stop():
-    wn.bye()
+    wn.clear()
+    wn.bgpic(endscreen)
 
 # start button
 strtbttn = "StartButton.gif"
@@ -160,33 +169,40 @@ def run_pong():
     global redscore
     while poolean == True:
         pong.fd(5)
-        # detect collisions between pong ball and the walls
+        # detect collisions between the pong ball and the walls
         if paddle_collision(pong, wall1):
             pong.bk(5)
-            angle = (pong.heading() + wall1.ycor() * -1)
-            if angle == 0.0:
+            if pong.ycor() + wall1.ycor() == 0.0:
                 angle = 180
-            pong.seth(angle)
+                pong.seth(angle)
+            elif angle == 0.0:
+                angle = 180
+                pong.seth(angle)
+            else:
+                angle = Rand.randint(135, 225)
+                pong.seth(angle)
             print(angle)
         if paddle_collision(pong, wall2):
-            pong.bk(5)
-            angle = (pong.heading() + wall2.ycor() * -1)
             if angle == 180:
-                angle = 0
-            pong.seth(angle)
+                angle = 0.0
+                pong.seth(angle)
+            else:
+                angle = Rand.randint(45, 315)
+                pong.seth(angle)
+            print(angle)
         if hrzntl_brdr_colide(pong, top_border):
             pong.seth(Rand.randint(0, 180))
         if hrzntl_brdr_colide(pong, bttm_border):
             pong.seth(Rand.randint(-180, 0))
         if scorebordercoll(pong, wall3):
             redscore += 1
-            scorecount1.clear()
-            scorecount1.write(redscore, font=font_setup)
+            scorer1.clear()
+            scorer1.write(redscore, font=font_setup)
             reset()
         if scorebordercoll(pong, wall4):
             bluescore += 1
-            scorecount2.clear()
-            scorecount2.write(bluescore, font=font_setup)
+            scorer2.clear()
+            scorer2.write(bluescore, font=font_setup)
             reset()
 
 # collision functions
