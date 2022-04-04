@@ -175,9 +175,6 @@ def run_pong():
             if pong.ycor() + wall1.ycor() == 0.0:
                 angle = 180
                 pong.seth(angle)
-            elif angle == 0.0:
-                angle = 180
-                pong.seth(angle)
             else:
                 angle = Rand.randint(135, 225)
                 pong.seth(angle)
