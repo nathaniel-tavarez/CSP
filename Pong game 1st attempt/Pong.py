@@ -6,7 +6,6 @@ wn = trtl.Screen()
 wn.bgcolor('black')
 background = "maze3.gif"
 wn.addshape(background)
-wn.bgpic(background)
 endscreen = 'end credits.gif'
 wn.addshape(endscreen)
 
@@ -21,6 +20,7 @@ pong.shape('circle')
 pong.color('black')
 pong.shapesize(float(.5))
 pong.speed("fastest")
+pong.ht()
 
 # paddles and walls
 wall4= trtl.Turtle ()
@@ -49,6 +49,7 @@ wall2.shapesize(wall_width, wall_height)
 wall2.goto(-350, 0)
 wall2.seth(90)
 wall2.speed("fastest")
+wall2.ht()
 
 wall1 = trtl.Turtle()
 wall1.up()
@@ -58,6 +59,7 @@ wall1.shapesize(wall_width, wall_height)
 wall1.goto(350, 0)
 wall1.seth(90)
 wall1.speed("fastest")
+wall1.ht()
 
 top_border = trtl.Turtle()
 top_border.up()
@@ -102,28 +104,34 @@ font_setup = ("Arial", 20, "normal")
 
 # move buttons
 def up():
-    wall1.fd(10)
+    wall1.fd(15)
 def LL():
-    wall2.fd(10)
+    wall2.fd(15)
 def Ln():
-    wall2.bk(10)
+    wall2.bk(15)
 def dn():
-    wall1.bk(10)
+    wall1.bk(15)
 
 # fun buttons
 def reset():
     pong.goto(0, 0)
     pong.seth(0)
     wall1.goto(350, 0)
-    wall2.goto(-350, 0)
+    wall2.goto(-350, 0  )
+
 def bugfix():
     pong.seth(Rand.randint(0, 360))
+
 def funbutton():
     global angle
     global poolean
     global bluescore
     global redscore
     poolean = False
+    wall1.st()
+    wall2.st()
+    pong.st()
+    wn.bgpic(background)
     while poolean == False:
         pong.fd(5)
         if paddle_collision(pong, wall1):
@@ -148,6 +156,7 @@ def funbutton():
             scorer2.clear()
             scorer2.write(bluescore, font=font_setup)
             reset()
+
 def stop():
     wn.clear()
     wn.bgpic(endscreen)
@@ -169,6 +178,7 @@ def run_pong():
     global angle
     global bluescore
     global redscore
+    wn.bgpic(background)
     while poolean == True:
         pong.fd(5)
         # detect collisions between the pong ball and the walls
