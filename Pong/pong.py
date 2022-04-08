@@ -12,7 +12,9 @@ endscreen = 'end credits.gif'
 wn.addshape(endscreen)
 Start_Screen = "Start Screen.gif"
 wn.addshape(Start_Screen)
-wn.bgpic(Start_Screen)
+Loading = "Loading....gif"
+wn.addshape(Loading)
+wn.bgpic(Loading)
 
 # pong ball and walls
 wall_width, wall_height = .5, 5
@@ -20,33 +22,34 @@ border_width, border_height = 80, .5
 
 # pong ball
 pong = trtl.Turtle()
+pong.ht()
 pong.up()
 pong.shape('circle')
 pong.color('black')
 pong.shapesize(float(.5))
 pong.speed("fastest")
-pong.ht()
 
 # paddles and walls
 wall4= trtl.Turtle ()
+wall4.ht()
 wall4.up()
 wall4.shape('square')
-wall4.ht()
 wall4.shapesize(border_height, border_width)
 wall4.goto(525, 0)
 wall4.seth(90)
 wall4.speed("fastest")
 
 wall3= trtl.Turtle ()
+wall3.ht()
 wall3.up()
 wall3.shape('square')
-wall3.ht()
 wall3.shapesize(border_height, border_width)
 wall3.goto(-525, 0)
 wall3.seth(90)
 wall3.speed("fastest")
 
 wall2 = trtl.Turtle()
+wall2.ht()
 wall2.up()
 wall2.shape('square')
 wall2.color('blue')
@@ -54,9 +57,9 @@ wall2.shapesize(wall_width, wall_height)
 wall2.goto(-350, 0)
 wall2.seth(90)
 wall2.speed("fastest")
-wall2.ht()
 
 wall1 = trtl.Turtle()
+wall1.ht()
 wall1.up()
 wall1.shape('square')
 wall1.color('red')
@@ -64,21 +67,20 @@ wall1.shapesize(wall_width, wall_height)
 wall1.goto(350, 0)
 wall1.seth(90)
 wall1.speed("fastest")
-wall1.ht()
 
 top_border = trtl.Turtle()
+top_border.ht()
 top_border.up()
 top_border.shape('square')
-top_border.ht()
 top_border.shapesize(border_width, border_height)
 top_border.goto(0, -300)
 top_border.seth(90)
 top_border.speed("fastest")
 
 bttm_border = trtl.Turtle()
+bttm_border.ht()
 bttm_border.up()
 bttm_border.shape('square')
-bttm_border.ht()
 bttm_border.shapesize(border_width, border_height)
 bttm_border.goto(0, 300)
 bttm_border.seth(90)
@@ -86,17 +88,17 @@ bttm_border.speed("fastest")
 
 # score counters
 scorer1 = trtl.Turtle()
+scorer1.ht()
 scorer1.up()
 scorer1.goto(50, 250)
 scorer1.pd()
-scorer1.ht()
 scorer1.speed("fastest")
 
 scorer2 = trtl.Turtle()
+scorer2.ht()
 scorer2.up()
 scorer2.goto(-150, 250)
 scorer2.pd()
-scorer2.ht()
 scorer2.speed("fastest")
 
 # variables for the game
@@ -163,15 +165,16 @@ def funbutton():
             reset()
 
 def stop():
+    global poolean
     wn.clear()
     wn.bgpic(endscreen)
+    if poolean == True:
+        poolean = False
+    else:
+        poolean = True
 
-# start button
-strtbttn = "StartButton.gif"
-wn.addshape(strtbttn)
-startbutton = trtl.Turtle(shape=strtbttn)
 def stort():
-    startbutton.ht()
+    wn.bgcolor('black')   
     wall1.st()
     wall2.st()
     pong.st()
@@ -230,6 +233,8 @@ def scorebordercoll(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width * curser_size and abs(a.ycor() - b.ycor()) < curser_size/2 + 999/2
 
 # key press sensors
+wn.bgcolor('White')
+wn.bgpic(Start_Screen)
 wn.onkeypress(up,"Up")
 wn.onkeypress(dn,"Down")
 wn.onkeypress(LL,"w")
