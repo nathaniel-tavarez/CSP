@@ -165,10 +165,16 @@ def funbutton():
             reset()
 
 def stop():
+    global poolean
     wn.clear()
     wn.bgpic(endscreen)
+    if poolean == True:
+        poolean = False
+    else:
+        poolean = True
 
 def stort():
+    wn.bgcolor('black')   
     wall1.st()
     wall2.st()
     pong.st()
@@ -227,6 +233,7 @@ def scorebordercoll(a, b):
     return abs(a.xcor() - b.xcor()) < curser_size/2 + wall_width * curser_size and abs(a.ycor() - b.ycor()) < curser_size/2 + 999/2
 
 # key press sensors
+wn.bgcolor('White')
 wn.bgpic(Start_Screen)
 wn.onkeypress(up,"Up")
 wn.onkeypress(dn,"Down")
